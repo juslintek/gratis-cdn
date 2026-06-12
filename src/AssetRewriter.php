@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 namespace Gratis\CDN;
 
-final class AssetRewriter
-{
-    public static function init(): void
-    {
+final class AssetRewriter {
+
+    public static function init(): void {
         $cdnUrl = get_option('gratis_cdn_url');
         if (!$cdnUrl) return;
 
@@ -24,8 +23,7 @@ final class AssetRewriter
         add_action('wp_head', [__CLASS__, 'preloadHints'], 1);
     }
 
-    private static function rewrite(string $url, string $cdnUrl): string
-    {
+    private static function rewrite(string $url, string $cdnUrl): string {
         $siteUrl = site_url();
         if (str_starts_with($url, $siteUrl)) {
             return str_replace($siteUrl, rtrim($cdnUrl, '/'), $url);
@@ -33,17 +31,15 @@ final class AssetRewriter
         return $url;
     }
 
-    private static function rewriteContent(string $content, string $cdnUrl): string
-    {
+    private static function rewriteContent(string $content, string $cdnUrl): string {
         $uploadDir = wp_get_upload_dir();
         $uploadUrl = $uploadDir['baseurl'];
         return str_replace($uploadUrl, rtrim($cdnUrl, '/') . '/wp-content/uploads', $content);
     }
 
-    public static function fingerprint(string $src): string
-    {
+    public static function fingerprint(string $src): string {
         if (!str_contains($src, site_url())) return $src;
-        $path = str_replace(site_url(), ABSPATH, parse_url($src, PHP_URL_PATH));
+        $path = str_replace(site_url(), ABSPATH, (string) wp_parse_url($src, PHP_URL_PATH));
         if (file_exists($path)) {
             $hash = substr(md5_file($path), 0, 8);
             $src = add_query_arg('v', $hash, $src);
@@ -51,8 +47,7 @@ final class AssetRewriter
         return $src;
     }
 
-    public static function preloadHints(): void
-    {
+    public static function preloadHints(): void {
         // Preconnect to CDN domain
         $cdnUrl = get_option('gratis_cdn_url');
         if ($cdnUrl) {
@@ -62,13 +57,12 @@ final class AssetRewriter
     }
 
     /** Get stats about rewritable assets. */
-    public static function getStats(): array
-    {
+    public static function getStats(): array {
         $uploadDir = wp_get_upload_dir();
         $size = 0; $count = 0;
         if (is_dir($uploadDir['basedir'])) {
             $it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($uploadDir['basedir'], \FilesystemIterator::SKIP_DOTS));
-            foreach ($it as $f) { $size += $f->getSize(); $count++; }
+            foreach ($it as $f) { $size += $f->getSize(); ++$count; }
         }
         return ['files' => $count, 'size_mb' => round($size / 1048576, 1), 'cdn_url' => get_option('gratis_cdn_url', 'not configured')];
     }
