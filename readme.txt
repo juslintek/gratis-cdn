@@ -48,6 +48,30 @@ No. Unless you explicitly configure an external service (such as a CDN or SMTP h
 
 Open an issue on the plugin's GitHub repository.
 
+== Third-Party Services ==
+
+This plugin connects to CDN provider APIs when you configure purge credentials and trigger a cache purge.
+
+= Cloudflare =
+
+Used for zone purge API calls when configured as your CDN provider.
+* [Terms of Service](https://www.cloudflare.com/terms/)
+* [Privacy Policy](https://www.cloudflare.com/privacypolicy/)
+
+= BunnyCDN =
+
+Used for pull zone purge API calls when configured as your CDN provider.
+* [Terms of Service](https://bunny.net/tos/)
+* [Privacy Policy](https://bunny.net/privacy/)
+
+= KeyCDN =
+
+Used for zone purge API calls when configured as your CDN provider.
+* [Terms of Service](https://www.keycdn.com/terms)
+* [Privacy Policy](https://www.keycdn.com/privacy)
+
+No data is sent to any external service unless you explicitly configure a CDN provider and credentials in the plugin settings.
+
 == Changelog ==
 
 = 1.0.0 =
