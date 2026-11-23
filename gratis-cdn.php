@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Gratis CDN
  * Plugin URI: https://github.com/juslintek/gratis-cdn
- * Description: Asset URL rewriting, content-hash cache busting, and a one-click CDN purge API (Cloudflare, BunnyCDN, KeyCDN, or webhook). Replaces CDN plugins ($10-50/mo).
+ * Description: Asset URL rewriting, content-hash cache busting, and a one-click CDN purge API (Cloudflare, BunnyCDN, KeyCDN, or webhook).
  * Version: 1.0.0
  * Requires at least: 6.0
  * Requires PHP: 8.1
