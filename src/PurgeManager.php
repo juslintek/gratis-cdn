@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace Gratis\CDN;
 
+defined('ABSPATH') || exit;
 /**
  * CDN cache purge API.
  *

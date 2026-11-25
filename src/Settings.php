@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace Gratis\CDN;
 
+defined('ABSPATH') || exit;
 /**
  * Admin settings page for Gratis CDN.
  *
